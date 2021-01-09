@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace handson.c.sharp
+namespace handson.c.sharp.Chapter2
 {
     class Chapter2
     {
@@ -64,10 +65,32 @@ namespace handson.c.sharp
             }
         }
 
-        static void Main(string[] args) =>
+        //Generics save the day
 
+        static List<string> GenerateNames()
+        {
+            List<string> names = new List<string>();
+
+            names.Add("Gamma");
+            names.Add("Vlissides");
+            names.Add("Johnson");
+            names.Add("Helm");
+
+            return names;
+        }
+
+        static void PrintNames(List<string> names)
+        {
+            foreach(string name in names)
+            {
+                Console.WriteLine(name);
+            }
+        }
+
+        static void Main(string[] args) =>
+            PrintNames(GenerateNames());
             //Array_PrintNames(Array_GenerateNames());
-            StringCollection_PrintNames(StringCollection_GenerateNames());
+            //StringCollection_PrintNames(StringCollection_GenerateNames());
             //ArrayList_PrintNames(ArrayList_GenerateNames());
     }
 }
