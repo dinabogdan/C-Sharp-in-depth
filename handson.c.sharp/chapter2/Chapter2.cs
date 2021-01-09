@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
+using handson.c.sharp.chapter2;
 
 namespace handson.c.sharp.Chapter2
 {
@@ -160,17 +161,26 @@ namespace handson.c.sharp.Chapter2
             //Console.WriteLine(typeof(List<int>));
             //Console.WriteLine(result.GetType());
 
-            PrintType<string>();
-            PrintType<String>();
-            PrintType<int>();
+            //PrintType<string>();
+            //PrintType<String>();
+            //PrintType<int>();
 
-            Console.WriteLine($"typeof(List<>) {typeof(List<>)}");
-            Console.WriteLine($"typeof(Dictionary<,>) {typeof(Dictionary<,>)}");
+            //Console.WriteLine($"typeof(List<>) {typeof(List<>)}");
+            //Console.WriteLine($"typeof(Dictionary<,>) {typeof(Dictionary<,>)}");
 
             //PrintNames(GenerateNames());
             //Array_PrintNames(Array_GenerateNames());
             //StringCollection_PrintNames(StringCollection_GenerateNames());
             //ArrayList_PrintNames(ArrayList_GenerateNames());
+
+            GenericCounter<string>.Increment();
+            GenericCounter<string>.Increment();
+            GenericCounter<string>.Display();
+
+
+            GenericCounter<int>.Display();
+            GenericCounter<int>.Increment();
+            GenericCounter<int>.Display();
         }
     }
 }
