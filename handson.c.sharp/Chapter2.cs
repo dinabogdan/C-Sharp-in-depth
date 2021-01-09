@@ -2,9 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 
 namespace handson.c.sharp.Chapter2
 {
+    class ValidatingList<T>
+    {
+        private readonly List<T> items = new List<T>();
+    }
+
     class Chapter2
     {
         static string[] Array_GenerateNames()
@@ -127,13 +133,39 @@ namespace handson.c.sharp.Chapter2
             return ret;
         }
 
+        static void PrintItems<T>(List<T> input) where T : IFormattable
+        {
+            CultureInfo culture = CultureInfo.InvariantCulture;
+            foreach(T item in input)
+            {
+                Console.WriteLine(item.ToString(null, culture));
+            }
+        }
+
+        static void PrintType<T>()
+        {
+            Console.WriteLine($"typeof(T) = {typeof(T)}");
+            Console.WriteLine($"typeof(List<T>) = {typeof(List<T>)}");
+        }
+
         static void Main(string[] args)
         {
-            List<int> numbers = GenerateNumbers();
+            //List<int> numbers = GenerateNumbers();
 
-            List<int> result = CopyAtMost(numbers, 2);
+            //List<int> result = CopyAtMost(numbers, 2);
 
-            PrintList(result);
+            //PrintList(result);
+
+            //Console.WriteLine($"Default value of an empty list: {default(List<int>)}");
+            //Console.WriteLine(typeof(List<int>));
+            //Console.WriteLine(result.GetType());
+
+            PrintType<string>();
+            PrintType<String>();
+            PrintType<int>();
+
+            Console.WriteLine($"typeof(List<>) {typeof(List<>)}");
+            Console.WriteLine($"typeof(Dictionary<,>) {typeof(Dictionary<,>)}");
 
             //PrintNames(GenerateNames());
             //Array_PrintNames(Array_GenerateNames());
