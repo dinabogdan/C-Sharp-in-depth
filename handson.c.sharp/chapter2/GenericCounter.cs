@@ -10,7 +10,7 @@ namespace handson.c.sharp.chapter2
         {
             Console.WriteLine($"Initializing counter for {typeof(T)}");
         }
-
+            
         public static void Increment()
         {
             value++;

@@ -149,12 +149,22 @@ namespace handson.c.sharp.Chapter2
             Console.WriteLine($"typeof(List<T>) = {typeof(List<T>)}");
         }
 
+        static void DisplayMaxPrice(Nullable<decimal> maxPrice)
+        {
+            if(maxPrice.HasValue)
+            {
+                Console.WriteLine($"Maximum price: {maxPrice.Value}");
+            }
+            else
+            {
+                Console.WriteLine("No maximum price set.");
+            }
+        }
+
         static void Main(string[] args)
         {
             //List<int> numbers = GenerateNumbers();
-
             //List<int> result = CopyAtMost(numbers, 2);
-
             //PrintList(result);
 
             //Console.WriteLine($"Default value of an empty list: {default(List<int>)}");
@@ -177,10 +187,50 @@ namespace handson.c.sharp.Chapter2
             GenericCounter<string>.Increment();
             GenericCounter<string>.Display();
 
-
             GenericCounter<int>.Display();
             GenericCounter<int>.Increment();
             GenericCounter<int>.Display();
+
+            Nullable<int> nullableInt = new Nullable<int>();
+
+            Console.WriteLine(nullableInt.HasValue);
+
+            DisplayMaxPrice(new Nullable<decimal>());
+
+            Console.WriteLine($"nullableInt.GetValueOrDefault(): {nullableInt.GetValueOrDefault()}");
+            Console.WriteLine($"nullableInt.GetValueOrDefault(100): {nullableInt.GetValueOrDefault(100)}");
+
+            Nullable<int> noValue = new Nullable<int>();
+            object noValueBoxed = noValue;
+            Console.WriteLine(noValueBoxed == null);
+            //Console.WriteLine(noValue.GetType());
+
+
+            Nullable<int> someValue = new Nullable<int>(5);
+            object someValueBoxed = someValue;
+            Console.WriteLine(someValueBoxed.GetType());
+
+            int? x = 0;
+            int y = 1;
+
+            int? z = x + y;
+            
+            Console.WriteLine($"the value of z is {z}");
+
+            x = null;
+            z = x + y;
+
+            Console.WriteLine($"the value of z is {z}");
+
+            static void PrintValueAsInt32(object o)
+            {
+                int? nullable = o as int?;
+                Console.WriteLine(nullable.HasValue ?
+                                  nullable.Value.ToString() : "null");
+            }
+            
+            PrintValueAsInt32(5); 
+            PrintValueAsInt32("some string");
         }
     }
 }
