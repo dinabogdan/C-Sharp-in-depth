@@ -171,7 +171,6 @@ namespace handson.c.sharp.Chapter2
             yield return 20;
         }
 
-
         static void Main(string[] args)
         {
             //List<int> numbers = GenerateNumbers();
@@ -243,9 +242,28 @@ namespace handson.c.sharp.Chapter2
             PrintValueAsInt32(5); 
             PrintValueAsInt32("some string");
 
-            foreach(int value in CreateSimpleIterator())
+            //foreach(int value in CreateSimpleIterator())
+            //{
+            //    Console.WriteLine($"yield value: {value}");
+            //}
+
+            //IEnumerable<int> enumerable = CreateSimpleIterator();
+            //using(IEnumerator<int> enumerator = enumerable.GetEnumerator())
+            //{
+            //    while(enumerator.MoveNext())
+            //    {
+            //        int value = enumerator.Current;
+            //            Console.WriteLine(value);
+            //    }
+            //}
+
+            foreach(var value in Fibonacci.Generate())
             {
-                Console.WriteLine($"yield value: {value}");
+                Console.WriteLine($"Fibonacci yield: {value}");
+                if(value> 1000)
+                {
+                    break;
+                }
             }
         }
     }
