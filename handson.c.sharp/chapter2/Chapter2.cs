@@ -161,6 +161,17 @@ namespace handson.c.sharp.Chapter2
             }
         }
 
+        static IEnumerable<int> CreateSimpleIterator()
+        {
+            yield return 10;
+            for(int i =0;i<3;i++)
+            {
+                yield return i;
+            }
+            yield return 20;
+        }
+
+
         static void Main(string[] args)
         {
             //List<int> numbers = GenerateNumbers();
@@ -231,6 +242,11 @@ namespace handson.c.sharp.Chapter2
             
             PrintValueAsInt32(5); 
             PrintValueAsInt32("some string");
+
+            foreach(int value in CreateSimpleIterator())
+            {
+                Console.WriteLine($"yield value: {value}");
+            }
         }
     }
 }
