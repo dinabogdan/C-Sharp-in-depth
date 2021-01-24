@@ -16,8 +16,8 @@ namespace handson.c.sharp.Chapter2
     {
         static string[] Array_GenerateNames()
         {
-            string[] names = new string[4]; 
-            names[0] = "Gamma"; 
+            string[] names = new string[4];
+            names[0] = "Gamma";
             names[1] = "Vlissides";
             names[2] = "Johnson";
             names[3] = "Helm";
@@ -34,7 +34,7 @@ namespace handson.c.sharp.Chapter2
             names.Add("Vlissides");
             names.Add("Johnson");
             names.Add("Helm");
-             
+
             //names.Add(1); // this does not fail at compile time, but will fail at runtime
 
             return names;
@@ -56,7 +56,7 @@ namespace handson.c.sharp.Chapter2
 
         static void ArrayList_PrintNames(ArrayList names)
         {
-            foreach(string name in names)
+            foreach (string name in names)
             {
                 Console.WriteLine(name);
             }
@@ -64,7 +64,7 @@ namespace handson.c.sharp.Chapter2
 
         static void Array_PrintNames(string[] names)
         {
-            foreach(string name in names)
+            foreach (string name in names)
             {
                 Console.WriteLine(name);
             }
@@ -107,7 +107,7 @@ namespace handson.c.sharp.Chapter2
 
         static void PrintList<T>(List<T> input)
         {
-            foreach(T t in input)
+            foreach (T t in input)
             {
                 Console.WriteLine(t);
             }
@@ -115,7 +115,7 @@ namespace handson.c.sharp.Chapter2
 
         static void PrintNames(List<string> names)
         {
-            foreach(string name in names)
+            foreach (string name in names)
             {
                 Console.WriteLine(name);
             }
@@ -137,7 +137,7 @@ namespace handson.c.sharp.Chapter2
         static void PrintItems<T>(List<T> input) where T : IFormattable
         {
             CultureInfo culture = CultureInfo.InvariantCulture;
-            foreach(T item in input)
+            foreach (T item in input)
             {
                 Console.WriteLine(item.ToString(null, culture));
             }
@@ -151,7 +151,7 @@ namespace handson.c.sharp.Chapter2
 
         static void DisplayMaxPrice(Nullable<decimal> maxPrice)
         {
-            if(maxPrice.HasValue)
+            if (maxPrice.HasValue)
             {
                 Console.WriteLine($"Maximum price: {maxPrice.Value}");
             }
@@ -164,11 +164,24 @@ namespace handson.c.sharp.Chapter2
         static IEnumerable<int> CreateSimpleIterator()
         {
             yield return 10;
-            for(int i =0;i<3;i++)
+            for (int i = 0; i < 3; i++)
             {
                 yield return i;
             }
             yield return 20;
+        }
+
+        static IEnumerable<int> CreateThrowingExIterator()
+        {
+            yield return 1;
+            for (int i = 0; i < 3; i++)
+            {
+                if(i == 2)
+                {
+                    throw new Exception("Bang!");
+                }
+                yield return i;
+            }
         }
 
         static void Main(string[] args)
@@ -224,7 +237,7 @@ namespace handson.c.sharp.Chapter2
             int y = 1;
 
             int? z = x + y;
-            
+
             Console.WriteLine($"the value of z is {z}");
 
             x = null;
@@ -238,8 +251,8 @@ namespace handson.c.sharp.Chapter2
                 Console.WriteLine(nullable.HasValue ?
                                   nullable.Value.ToString() : "null");
             }
-            
-            PrintValueAsInt32(5); 
+
+            PrintValueAsInt32(5);
             PrintValueAsInt32("some string");
 
             //foreach(int value in CreateSimpleIterator())
@@ -257,10 +270,19 @@ namespace handson.c.sharp.Chapter2
             //    }
             //}
 
-            foreach(var value in Fibonacci.Generate())
+            IEnumerable<int> enumerable = CreateThrowingExIterator();
+            using(IEnumerator<int> enumerator = enumerable.GetEnumerator())
+            {
+                while(enumerator.MoveNext())
+                {
+                    Console.WriteLine(enumerator.Current);
+                }
+            }
+
+            foreach (var value in Fibonacci.Generate())
             {
                 Console.WriteLine($"Fibonacci yield: {value}");
-                if(value> 1000)
+                if (value > 1000)
                 {
                     break;
                 }
