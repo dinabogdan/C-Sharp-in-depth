@@ -7,5 +7,6 @@
 
   <ItemGroup>
     <Folder Include="chapter2\" />
+    <Folder Include="chapter3\" />
   </ItemGroup>
 </Project>

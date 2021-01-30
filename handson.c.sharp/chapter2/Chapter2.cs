@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
+using System.IO;
 using handson.c.sharp.chapter2;
 
 namespace handson.c.sharp.Chapter2
@@ -176,7 +177,7 @@ namespace handson.c.sharp.Chapter2
             yield return 1;
             for (int i = 0; i < 3; i++)
             {
-                if(i == 2)
+                if (i == 2)
                 {
                     throw new Exception("Bang!");
                 }
@@ -184,109 +185,110 @@ namespace handson.c.sharp.Chapter2
             }
         }
 
-        static void Main(string[] args)
-        {
-            //List<int> numbers = GenerateNumbers();
-            //List<int> result = CopyAtMost(numbers, 2);
-            //PrintList(result);
+        //    static void Main(string[] args)
+        //    {
+        //        //List<int> numbers = GenerateNumbers();
+        //        //List<int> result = CopyAtMost(numbers, 2);
+        //        //PrintList(result);
 
-            //Console.WriteLine($"Default value of an empty list: {default(List<int>)}");
-            //Console.WriteLine(typeof(List<int>));
-            //Console.WriteLine(result.GetType());
+        //        //Console.WriteLine($"Default value of an empty list: {default(List<int>)}");
+        //        //Console.WriteLine(typeof(List<int>));
+        //        //Console.WriteLine(result.GetType());
 
-            //PrintType<string>();
-            //PrintType<String>();
-            //PrintType<int>();
+        //        //PrintType<string>();
+        //        //PrintType<String>();
+        //        //PrintType<int>();
 
-            //Console.WriteLine($"typeof(List<>) {typeof(List<>)}");
-            //Console.WriteLine($"typeof(Dictionary<,>) {typeof(Dictionary<,>)}");
+        //        //Console.WriteLine($"typeof(List<>) {typeof(List<>)}");
+        //        //Console.WriteLine($"typeof(Dictionary<,>) {typeof(Dictionary<,>)}");
 
-            //PrintNames(GenerateNames());
-            //Array_PrintNames(Array_GenerateNames());
-            //StringCollection_PrintNames(StringCollection_GenerateNames());
-            //ArrayList_PrintNames(ArrayList_GenerateNames());
+        //        //PrintNames(GenerateNames());
+        //        //Array_PrintNames(Array_GenerateNames());
+        //        //StringCollection_PrintNames(StringCollection_GenerateNames());
+        //        //ArrayList_PrintNames(ArrayList_GenerateNames());
 
-            GenericCounter<string>.Increment();
-            GenericCounter<string>.Increment();
-            GenericCounter<string>.Display();
+        //        GenericCounter<string>.Increment();
+        //        GenericCounter<string>.Increment();
+        //        GenericCounter<string>.Display();
 
-            GenericCounter<int>.Display();
-            GenericCounter<int>.Increment();
-            GenericCounter<int>.Display();
+        //        GenericCounter<int>.Display();
+        //        GenericCounter<int>.Increment();
+        //        GenericCounter<int>.Display();
 
-            Nullable<int> nullableInt = new Nullable<int>();
+        //        Nullable<int> nullableInt = new Nullable<int>();
 
-            Console.WriteLine(nullableInt.HasValue);
+        //        Console.WriteLine(nullableInt.HasValue);
 
-            DisplayMaxPrice(new Nullable<decimal>());
+        //        DisplayMaxPrice(new Nullable<decimal>());
 
-            Console.WriteLine($"nullableInt.GetValueOrDefault(): {nullableInt.GetValueOrDefault()}");
-            Console.WriteLine($"nullableInt.GetValueOrDefault(100): {nullableInt.GetValueOrDefault(100)}");
+        //        Console.WriteLine($"nullableInt.GetValueOrDefault(): {nullableInt.GetValueOrDefault()}");
+        //        Console.WriteLine($"nullableInt.GetValueOrDefault(100): {nullableInt.GetValueOrDefault(100)}");
 
-            Nullable<int> noValue = new Nullable<int>();
-            object noValueBoxed = noValue;
-            Console.WriteLine(noValueBoxed == null);
-            //Console.WriteLine(noValue.GetType());
+        //        Nullable<int> noValue = new Nullable<int>();
+        //        object noValueBoxed = noValue;
+        //        Console.WriteLine(noValueBoxed == null);
+        //        //Console.WriteLine(noValue.GetType());
 
 
-            Nullable<int> someValue = new Nullable<int>(5);
-            object someValueBoxed = someValue;
-            Console.WriteLine(someValueBoxed.GetType());
+        //        Nullable<int> someValue = new Nullable<int>(5);
+        //        object someValueBoxed = someValue;
+        //        Console.WriteLine(someValueBoxed.GetType());
 
-            int? x = 0;
-            int y = 1;
+        //        int? x = 0;
+        //        int y = 1;
 
-            int? z = x + y;
+        //        int? z = x + y;
 
-            Console.WriteLine($"the value of z is {z}");
+        //        Console.WriteLine($"the value of z is {z}");
 
-            x = null;
-            z = x + y;
+        //        x = null;
+        //        z = x + y;
 
-            Console.WriteLine($"the value of z is {z}");
+        //        Console.WriteLine($"the value of z is {z}");
 
-            static void PrintValueAsInt32(object o)
-            {
-                int? nullable = o as int?;
-                Console.WriteLine(nullable.HasValue ?
-                                  nullable.Value.ToString() : "null");
-            }
+        //        static void PrintValueAsInt32(object o)
+        //        {
+        //            int? nullable = o as int?;
+        //            Console.WriteLine(nullable.HasValue ?
+        //                              nullable.Value.ToString() : "null");
+        //        }
 
-            PrintValueAsInt32(5);
-            PrintValueAsInt32("some string");
+        //        PrintValueAsInt32(5);
+        //        PrintValueAsInt32("some string");
 
-            //foreach(int value in CreateSimpleIterator())
-            //{
-            //    Console.WriteLine($"yield value: {value}");
-            //}
+        //        //foreach(int value in CreateSimpleIterator())
+        //        //{
+        //        //    Console.WriteLine($"yield value: {value}");
+        //        //}
 
-            //IEnumerable<int> enumerable = CreateSimpleIterator();
-            //using(IEnumerator<int> enumerator = enumerable.GetEnumerator())
-            //{
-            //    while(enumerator.MoveNext())
-            //    {
-            //        int value = enumerator.Current;
-            //            Console.WriteLine(value);
-            //    }
-            //}
+        //        //IEnumerable<int> enumerable = CreateSimpleIterator();
+        //        //using(IEnumerator<int> enumerator = enumerable.GetEnumerator())
+        //        //{
+        //        //    while(enumerator.MoveNext())
+        //        //    {
+        //        //        int value = enumerator.Current;
+        //        //            Console.WriteLine(value);
+        //        //    }
+        //        //}
 
-            IEnumerable<int> enumerable = CreateThrowingExIterator();
-            using(IEnumerator<int> enumerator = enumerable.GetEnumerator())
-            {
-                while(enumerator.MoveNext())
-                {
-                    Console.WriteLine(enumerator.Current);
-                }
-            }
+        //        IEnumerable<int> enumerable = CreateThrowingExIterator();
+        //        using(IEnumerator<int> enumerator = enumerable.GetEnumerator())
+        //        {
+        //            while(enumerator.MoveNext())
+        //            {
+        //                Console.WriteLine(enumerator.Current);
+        //            }
+        //        }
 
-            foreach (var value in Fibonacci.Generate())
-            {
-                Console.WriteLine($"Fibonacci yield: {value}");
-                if (value > 1000)
-                {
-                    break;
-                }
-            }
-        }
+        //        foreach (var value in Fibonacci.Generate())
+        //        {
+        //            Console.WriteLine($"Fibonacci yield: {value}");
+        //            if (value > 1000)
+        //            {
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
     }
 }
