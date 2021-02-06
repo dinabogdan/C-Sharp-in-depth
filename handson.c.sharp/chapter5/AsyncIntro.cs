@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -28,18 +29,45 @@ namespace handson.c.sharp.chapter5
             Console.WriteLine("After second await");
         }
 
-        static async Task<int> ComputeLengthAsync(string text)
+        static Task<int> ComputeLengthAsync(string text)
         {
             if (text == null)
             {
                 throw new ArgumentNullException("text");
             }
+
+            return ComputeLengthAsyncImpl(text);
+        }
+
+        static async Task<int> ComputeLengthAsyncImpl(string text)
+        {
+
             await Task.Delay(500);
             return text.Length;
         }
 
+        Func<int, Task<int>> function = async x =>
+        {
+            Console.WriteLine("Starting... x={0}", x);
+            await Task.Delay(x * 1000);
+            Console.WriteLine("Finished... x={0}", x);
+            return x * 2;
+        };
+
+
+
+        static async Task PrintAndWait(TimeSpan delay)
+        {
+            Console.WriteLine("Before first delay");
+            await Task.Delay(delay);
+            Console.WriteLine("Between delays");
+            await Task.Delay(delay);
+            Console.WriteLine("After second delay");
+        }
+
         static async Task Main()
         {
+
             AsyncIntro asyncIntro = new AsyncIntro();
             asyncIntro.DisplayWebSiteLength().Wait();
 
@@ -49,10 +77,36 @@ namespace handson.c.sharp.chapter5
             task.Wait();
             Console.WriteLine("Task completed");
 
-            Task<int> computedLengthTask = ComputeLengthAsync(null);
-            Console.WriteLine("fetched the task");
-            int length = await computedLengthTask;
-            Console.WriteLine("Length: {0}", length);
+            //Task<int> computedLengthTask = ComputeLengthAsync(null);
+            //Console.WriteLine("fetched the task");
+            //int length = await computedLengthTask; // here it will throw the ArgumentNotNullException
+            //Console.WriteLine("Length: {0}", length);
+
+            Task<int> first = asyncIntro.function(5);
+            Task<int> second = asyncIntro.function(3);
+
+            int firstResult = await first;
+            int secondResult = await second;
+
+            Console.WriteLine("First result: {0}", firstResult);
+            Console.WriteLine("Second result: {0}", secondResult);
+
+
+
+            //List<string> values = new List<string> { "x", "y", "z", "t" };
+            //List<Action> actions = new List<Action>();
+            //for (int i = 0; i < values.Count; i++)
+            //{
+            //    //actions.Add(() => Console.WriteLine("Executed action {0}", values[i])); 
+            //}
+
+            //for (int i = 0; i < actions.Count; i++)
+            //{
+            //    actions[i]();
+            //}
+
+
+            // the above code throws ArgumentOutOfRangeException
         }
     }
 }
