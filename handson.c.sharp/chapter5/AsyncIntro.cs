@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace handson.c.sharp.chapter5
@@ -65,6 +66,15 @@ namespace handson.c.sharp.chapter5
             Console.WriteLine("After second delay");
         }
 
+
+        static void ShowInfo(
+            [CallerFilePath] string fileName = null,
+            [CallerLineNumber] int lineNumber = 0,
+            [CallerMemberName] string memberName = null)
+        {
+            Console.WriteLine("{0}:{1} - {2}", fileName, lineNumber, memberName);
+        }
+
         static async Task Main()
         {
 
@@ -91,8 +101,6 @@ namespace handson.c.sharp.chapter5
             Console.WriteLine("First result: {0}", firstResult);
             Console.WriteLine("Second result: {0}", secondResult);
 
-
-
             //List<string> values = new List<string> { "x", "y", "z", "t" };
             //List<Action> actions = new List<Action>();
             //for (int i = 0; i < values.Count; i++)
@@ -105,8 +113,24 @@ namespace handson.c.sharp.chapter5
             //    actions[i]();
             //}
 
-
             // the above code throws ArgumentOutOfRangeException
+
+            ShowInfo();
+            ShowInfo("~/someFile.txt", 20);
+
+            var collectionInitializer = new Dictionary<string, int>
+            {
+                {"A", 20 },
+                {"B", 30 },
+                //{"B", 40 } // here it will throw an exception 'cause the 'B' key already exist
+            };
+
+            var objectInitializer = new Dictionary<string, int>
+            {
+                ["A"] = 20,
+                ["B"] = 30,
+                ["B"] = 40
+            };
         }
     }
 }
