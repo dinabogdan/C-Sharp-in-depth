@@ -75,62 +75,62 @@ namespace handson.c.sharp.chapter5
             Console.WriteLine("{0}:{1} - {2}", fileName, lineNumber, memberName);
         }
 
-        static async Task Main()
-        {
+        //static async Task Main()
+        //{
 
-            AsyncIntro asyncIntro = new AsyncIntro();
-            asyncIntro.DisplayWebSiteLength().Wait();
+        //    AsyncIntro asyncIntro = new AsyncIntro();
+        //    asyncIntro.DisplayWebSiteLength().Wait();
 
 
-            Task task = DemoCompletedAsync();
-            Console.WriteLine("method returned");
-            task.Wait();
-            Console.WriteLine("Task completed");
+        //    Task task = DemoCompletedAsync();
+        //    Console.WriteLine("method returned");
+        //    task.Wait();
+        //    Console.WriteLine("Task completed");
 
-            //Task<int> computedLengthTask = ComputeLengthAsync(null);
-            //Console.WriteLine("fetched the task");
-            //int length = await computedLengthTask; // here it will throw the ArgumentNotNullException
-            //Console.WriteLine("Length: {0}", length);
+        //    //Task<int> computedLengthTask = ComputeLengthAsync(null);
+        //    //Console.WriteLine("fetched the task");
+        //    //int length = await computedLengthTask; // here it will throw the ArgumentNotNullException
+        //    //Console.WriteLine("Length: {0}", length);
 
-            Task<int> first = asyncIntro.function(5);
-            Task<int> second = asyncIntro.function(3);
+        //    Task<int> first = asyncIntro.function(5);
+        //    Task<int> second = asyncIntro.function(3);
 
-            int firstResult = await first;
-            int secondResult = await second;
+        //    int firstResult = await first;
+        //    int secondResult = await second;
 
-            Console.WriteLine("First result: {0}", firstResult);
-            Console.WriteLine("Second result: {0}", secondResult);
+        //    Console.WriteLine("First result: {0}", firstResult);
+        //    Console.WriteLine("Second result: {0}", secondResult);
 
-            //List<string> values = new List<string> { "x", "y", "z", "t" };
-            //List<Action> actions = new List<Action>();
-            //for (int i = 0; i < values.Count; i++)
-            //{
-            //    //actions.Add(() => Console.WriteLine("Executed action {0}", values[i])); 
-            //}
+        //    //List<string> values = new List<string> { "x", "y", "z", "t" };
+        //    //List<Action> actions = new List<Action>();
+        //    //for (int i = 0; i < values.Count; i++)
+        //    //{
+        //    //    //actions.Add(() => Console.WriteLine("Executed action {0}", values[i])); 
+        //    //}
 
-            //for (int i = 0; i < actions.Count; i++)
-            //{
-            //    actions[i]();
-            //}
+        //    //for (int i = 0; i < actions.Count; i++)
+        //    //{
+        //    //    actions[i]();
+        //    //}
 
-            // the above code throws ArgumentOutOfRangeException
+        //    // the above code throws ArgumentOutOfRangeException
 
-            ShowInfo();
-            ShowInfo("~/someFile.txt", 20);
+        //    ShowInfo();
+        //    ShowInfo("~/someFile.txt", 20);
 
-            var collectionInitializer = new Dictionary<string, int>
-            {
-                {"A", 20 },
-                {"B", 30 },
-                //{"B", 40 } // here it will throw an exception 'cause the 'B' key already exist
-            };
+        //    var collectionInitializer = new Dictionary<string, int>
+        //    {
+        //        {"A", 20 },
+        //        {"B", 30 },
+        //        //{"B", 40 } // here it will throw an exception 'cause the 'B' key already exist
+        //    };
 
-            var objectInitializer = new Dictionary<string, int>
-            {
-                ["A"] = 20,
-                ["B"] = 30,
-                ["B"] = 40
-            };
-        }
+        //    var objectInitializer = new Dictionary<string, int>
+        //    {
+        //        ["A"] = 20,
+        //        ["B"] = 30,
+        //        ["B"] = 40
+        //    };
+        //}
     }
 }
