@@ -11,5 +11,6 @@
     <Folder Include="chapter4\" />
     <Folder Include="chapter5\" />
     <Folder Include="chapter10\" />
+    <Folder Include="chapter14\" />
   </ItemGroup>
 </Project>
